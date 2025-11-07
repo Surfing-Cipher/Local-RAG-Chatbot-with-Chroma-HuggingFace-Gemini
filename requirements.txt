@@ -1,0 +1,18 @@
+# --- Core Python & Config ---
+python-dotenv==1.0.1
+streamlit==1.36.0
+chromadb==0.5.5
+
+# --- LangChain Decoupled Packages (Essential for LCEL) ---
+langchain==0.2.11
+langchain-core==0.2.24
+langchain-community==0.2.7
+langchain-text-splitters==0.2.2
+langchain-huggingface==0.0.7
+
+# --- LLM and Embedding (Cloud API - Recommended for Speed) ---
+langchain-google-genai==0.0.11
+
+
+
+

@@ -1,0 +1,47 @@
+# ------------------------
+# Python & Virtual Env
+# ------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# ------------------------
+# IDE / Editor
+# ------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ------------------------
+# OS Files
+# ------------------------
+.DS_Store
+Thumbs.db
+
+# ------------------------
+# Chroma Vector Database
+# ------------------------
+chroma/
+chroma/*
+
+# ------------------------
+# Streamlit Cache
+# ------------------------
+.streamlit/
+**/.streamlit/
+
+# ------------------------
+# Logs & Temp
+# ------------------------
+*.log
+tmp/
+temp/
+.cache/
