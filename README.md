@@ -34,21 +34,39 @@ project-root/
 
 ---
 
-## Architecture (educational overview)
+### Architecture (Educational Overview)
 
-At a high level the pipeline is:
+At a high level, the RAG pipeline works like this:
 
-```mermaid
-flowchart LR
-  Q[User Query] --> E[Embed Query (HF Embeddings)]
-  E --> S[Vector Search (Chroma)]
-  S --> T[Top-k Chunks]
-  T --> R[Reranking via Cosine Similarity]
-  R --> P[LLM Prompt (Gemini) with Context]
-  P --> A[Gemini Generated Answer]
-  style Q fill:#f8f9fa,stroke:#333
-  style A fill:#f0fff0,stroke:#333
-```
++----------+      +--------------------------+
+|  Query   | -->  | HF Embeddings (Vectorize)|
++----------+      +--------------------------+
+                         |
+                         v
+                 +----------------+
+                 | Chroma Search  |
+                 +----------------+
+                         |
+                         v
+                 +----------------+
+                 |  Top-k Chunks  |
+                 +----------------+
+                         |
+                         v
+                 +----------------+
+                 |  Rerank (Cos)  |
+                 +----------------+
+                         |
+                         v
+                 +------------------------+
+                 | Build RAG Prompt + LLM |
+                 +------------------------+
+                         |
+                         v
+                 +----------------+
+                 | Final Answer   |
+                 +----------------+
+
 
 1. **Embed**: The query is converted to a dense vector using a local HuggingFace embedding model (`all-MiniLM-L6-v2`).
 2. **Search**: That vector is used to query the local Chroma vector store (`k=3` by default).
@@ -246,50 +264,9 @@ You can embed them in this README with:
 
 ## License & attribution
 
-(Choose and add a license of your preference, e.g., MIT)
+MIT
 
 ---
-
-If you want, I can:
-
-- produce a ready-made `.gitignore` (includes `chroma/`, `.env`, `.venv/`),
-- prepare a Dockerfile (CPU-focused) to run the app reproducibly, or
-- remove/relax version pins in `requirements.txt`.
-
-```
-
----
-
-# `requirements.txt`
-
-```
-
-# Core runtime
-
-python-dotenv==1.0.1
-streamlit==1.22.0
-numpy==1.25.3
-tqdm==4.66.1
-
-# LangChain ecosystem (core + community)
-
-langchain==0.2.2
-langchain-core==0.2.2
-langchain-huggingface==0.0.16
-langchain-community==0.2.3
-langchain-text-splitters==0.0.7
-langchain-google-genai==0.0.8
-
-# Vector DB (Chroma) & local embedding dependencies
-
-chromadb==0.4.4
-sentence-transformers==2.2.2
-transformers==4.34.0
-
-# PyTorch - required by many HF embedding models (install wheel appropriate for your OS/GPU)
-
-torch==2.2.0
-accelerate==0.20.3
 
 ````
 
